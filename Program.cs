@@ -225,8 +225,10 @@ static int Attack(string attack, List<string> attacksDone, string[,] board, List
 
     if (attack.Contains("10"))
         aux = attack.Replace("10", ":");
-    else
-        aux = attack;
+    
+    aux = attack;
+    if (CheckAttack(aux) == 0);
+        return 0;
 
     int[] positionInt = new int[aux.Length];
 
@@ -288,7 +290,7 @@ static int Attack(string attack, List<string> attacksDone, string[,] board, List
         ships.Remove(position);
     }
 
-    board[positionInt[0], positionInt[1]] = attackResult;
+     board[positionInt[0], positionInt[1]] = attackResult;
     return 1;
 
 }
@@ -583,7 +585,7 @@ static void GameSinglePlayer(string playerName01, string playerName02, List<stri
             do
             {
                 attack = Console.ReadLine().Trim().ToUpper();
-            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0);
+            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0 && CheckAttack(attack) == 0);
 
             // Validando a jogada do player
             if (Attack(attack, player1Attacks, player2Board, player2Ships) == 0)
@@ -672,7 +674,7 @@ static void GameMultiPlayer(string playerName01, string playerName02, List<strin
             do
             {
                 attack = Console.ReadLine().Trim().ToUpper();
-            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0);
+            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0 && CheckAttack(attack) == 0);
 
             // Validando a jogada do player
             if (Attack(attack, player1Attacks, player2Board, player2Ships) == 0)
@@ -713,7 +715,7 @@ static void GameMultiPlayer(string playerName01, string playerName02, List<strin
             do
             {
                 attack = Console.ReadLine().Trim().ToUpper();
-            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0);
+            } while (!string.IsNullOrWhiteSpace(attack) && ValidAttack(attack) == 0 && CheckAttack(attack) == 0);
 
             // Validando a jogada do player
             if (Attack(attack, player2Attacks, player1Board, player1Ships) == 0)
@@ -744,4 +746,22 @@ static void GameMultiPlayer(string playerName01, string playerName02, List<strin
     Console.WriteLine($"PARABÉNS {winner}, VOCÊ É O GRANDE VENCEDOR!!!");
     Console.WriteLine("Pressione qualquer tecla para sair...");
     Console.ReadKey();
+}
+
+static int CheckAttack(string attack)
+{
+    string aux;
+    aux = attack;
+    if (attack.Contains("10"))
+    {
+        aux = attack.Replace("10", ":");
+    }
+
+    if (aux.Length > 2)
+        return 0;
+
+    if (aux[1] < 49 || aux[1] > 58 || aux[0] < 65 || aux[0] > 74)
+        return 0;
+
+    return 1;
 }
