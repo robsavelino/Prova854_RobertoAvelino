@@ -390,9 +390,9 @@ static void AddPlayer(string playerName, List<string> playerShips)
     List<string> checkShips = new List<string>();
 
     int countPS = 1;
-    int countNT = 1;
-    int countDS = 1;
-    int countSB = 1;
+    int countNT = 2;
+    int countDS = 3;
+    int countSB = 4;
 
     // Adiciona os navios enquanto houver navios a serem adicionados
     while (countDS > 0 || countSB > 0 || countNT > 0 || countPS > 0)
