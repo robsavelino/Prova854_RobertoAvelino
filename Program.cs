@@ -748,6 +748,7 @@ static void GameMultiPlayer(string playerName01, string playerName02, List<strin
     Console.ReadKey();
 }
 
+// Checa e valida se o ataque está dentro dos parâmetros esperados
 static int CheckAttack(string attack)
 {
     string aux;
